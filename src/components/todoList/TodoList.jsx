@@ -16,8 +16,9 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 // handleComplete: Función para marcar una tarea como completada.
 // handleEdit: (Pendiente) Función para editar una tarea.
 
-const TodoList = ({ todos, setTodos }) => {
+const TodoList = ({ todos, setTodos, setEditTodo }) => {
 	const handleDelete = (id) => {
+		console.log(`Deleting todo with id: ${id}`);
 		setTodos(todos.filter((todo) => todo.id !== id));
 	};
 
@@ -34,7 +35,9 @@ const TodoList = ({ todos, setTodos }) => {
 	};
 
 	const handleEdit = (id) => {
-		// Lógica para editar el todo
+		console.log(`Editing todo with id: ${id}`);
+		const findTodo = todos.find((todo) => todo.id === id);
+		setEditTodo(findTodo);
 	};
 
 	return (
@@ -48,10 +51,10 @@ const TodoList = ({ todos, setTodos }) => {
 						fullWidth
 					/>
 					<ListItemSecondaryAction>
-						<IconButton edge="end" onClick={() => handleComplete(todo)}>
+						<IconButton edge="end" onClick={() => handleComplete(todo.id)}>
 							<CheckCircleIcon />
 						</IconButton>
-						<IconButton edge="end" onClick={() => handleEdit(todo)}>
+						<IconButton edge="end" onClick={() => handleEdit(todo.id)}>
 							<EditIcon />
 						</IconButton>
 						<IconButton edge="end" onClick={() => handleDelete(todo.id)}>
