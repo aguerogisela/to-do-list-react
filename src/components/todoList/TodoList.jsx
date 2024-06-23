@@ -22,10 +22,14 @@ const TodoList = ({ todos, setTodos }) => {
 	};
 
 	const handleComplete = (id) => {
+		console.log(`Completing todo with id: ${id}`);
 		setTodos(
-			todos.map((todo) =>
-				todo.id === id ? { ...todo, completed: !todo.completed } : todo
-			)
+			todos.map((item) => {
+				if (item.id === id) {
+					return { ...item, completed: !item.completed };
+				}
+				return item;
+			})
 		);
 	};
 
@@ -44,10 +48,10 @@ const TodoList = ({ todos, setTodos }) => {
 						fullWidth
 					/>
 					<ListItemSecondaryAction>
-						<IconButton edge="end" onClick={() => handleComplete(todo.id)}>
+						<IconButton edge="end" onClick={() => handleComplete(todo)}>
 							<CheckCircleIcon />
 						</IconButton>
-						<IconButton edge="end" onClick={() => handleEdit(todo.id)}>
+						<IconButton edge="end" onClick={() => handleEdit(todo)}>
 							<EditIcon />
 						</IconButton>
 						<IconButton edge="end" onClick={() => handleDelete(todo.id)}>
